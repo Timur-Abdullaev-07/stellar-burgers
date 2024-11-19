@@ -9,19 +9,19 @@ export const getAllUserOrders = createAsyncThunk(
   async () => getOrdersApi()
 );
 
-type TUserOrdersSlice = {
+export type TUserOrdersSlice = {
   orders: TOrder[];
   loading: boolean;
   error: string | null;
 };
 
-const initialState: TUserOrdersSlice = {
+export const initialState: TUserOrdersSlice = {
   orders: [],
   loading: false,
   error: null
 };
 
-const allOrdersSlice = createSlice({
+const userOrdersSlice = createSlice({
   name: USER_ORDERS_SLICE_NAME,
   initialState,
   reducers: {},
@@ -46,5 +46,6 @@ const allOrdersSlice = createSlice({
   }
 });
 
-export const userOrdersReducer = allOrdersSlice.reducer;
-export const { getUserOrders, getUserOrdersLoading } = allOrdersSlice.selectors;
+export const userOrdersReducer = userOrdersSlice.reducer;
+export const { getUserOrders, getUserOrdersLoading } =
+  userOrdersSlice.selectors;

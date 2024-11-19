@@ -38,7 +38,7 @@ export const updateUser = createAsyncThunk(
   async (user: Partial<TRegisterData>) => updateUserApi(user)
 );
 
-type TUserState = {
+export type TUserState = {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   user: TUser | null;
@@ -48,7 +48,7 @@ type TUserState = {
   userRequest: boolean;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   isAuthenticated: false,
   user: null,
@@ -88,8 +88,6 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loginUserError = '';
         state.userRequest = false;
-        setCookie('accessToken', action.payload.accessToken);
-        localStorage.setItem('refreshToken', action.payload.refreshToken);
         state.user = action.payload.user;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
@@ -106,8 +104,6 @@ const userSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.registerUserError = '';
         state.userRequest = false;
-        setCookie('accessToken', action.payload.accessToken);
-        localStorage.setItem('refreshToken', action.payload.refreshToken);
         state.user = action.payload.user;
         state.isAuthenticated = true;
         state.isAuthChecked = true;
@@ -123,8 +119,6 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
         if (action.payload.success) {
-          localStorage.clear();
-          deleteCookie('accessToken');
           state.user = null;
           state.isAuthenticated = false;
         } else {

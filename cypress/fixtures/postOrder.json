@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "order": {
+    "_id": "673b0ab6b27b06001c3e8d8c",
+    "status": "done",
+    "name": "Флюоресцентный люминесцентный био-марсианский бургер",
+    "createdAt": "2024-11-18T09:36:54.907Z",
+    "updatedAt": "2024-11-18T09:36:55.950Z",
+    "number": 59648,
+    "ingredients": ["643d69a5c3f7b9001cfa093d", "643d69a5c3f7b9001cfa093e"]
+  },
+  "name": "burger"
+}
