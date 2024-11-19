@@ -2,25 +2,15 @@ import { describe, expect, test } from '@jest/globals';
 import {
   burgerConstructorReducer,
   postOrder,
-  TBurgerConstructor,
   removeIngredient,
   changeBun,
   clearConstructor,
-  moveIngredient
+  moveIngredient,
+  initialState
 } from '../slices/burgerConstructorSlice';
 import { TOrder } from '@utils-types';
 
 describe('burgerConstructorSlice', () => {
-  const initialState: TBurgerConstructor = {
-    constructorItems: {
-      bun: null,
-      ingredients: []
-    },
-    orderRequest: false,
-    orderModalData: null,
-    error: null
-  };
-
   const order: TOrder = {
     _id: '673b0ab6b27b06001c3e8d8c',
     status: 'done',

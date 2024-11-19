@@ -2,17 +2,11 @@ import { describe, expect, test } from '@jest/globals';
 import {
   userOrdersReducer,
   getAllUserOrders,
-  TUserOrdersSlice
+  initialState
 } from '../slices/userOrdersSlice';
 import { TOrder } from '@utils-types';
 
 describe('userOrdersSlice', () => {
-  const initialState: TUserOrdersSlice = {
-    orders: [],
-    loading: false,
-    error: null
-  };
-
   test('userOrdersSlice.pending', () => {
     const referenceState = {
       orders: [],

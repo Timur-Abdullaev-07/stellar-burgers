@@ -2,19 +2,11 @@ import { describe, expect, test } from '@jest/globals';
 import {
   feedsReducer,
   getAllUsersOrders,
-  TFeedSlice
+  initialState
 } from '../slices/feedsSlice';
 import { TOrder } from '@utils-types';
 
 describe('feedsSlice', () => {
-  const initialState: TFeedSlice = {
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    loading: false,
-    error: null
-  };
-
   test('feedsSlice.pending', () => {
     const referenceState = {
       orders: [],

@@ -1,31 +1,32 @@
 /// <reference types="cypress" />
 
+const BUNS_INGREDIENTS = '[data-cy=buns-ingredients]';
+const TOP_BUN_CONSTRUCTOR = '[data-cy=constructor-bun-1]';
+const BOTTOM_BUN_CONSTRUCTOR = '[data-cy=constructor-bun-2]';
+const MAIN_INGREDIENTS_CONSTRUCTOR = '[data-cy=constructor-main]';
+const MAIN_INGREDIENTS = '[data-cy=mains-ingredients]';
+const MODAL = '[data-cy=modal]';
+const MODAL_CLOSE_BUTTON = '[data-cy=modal__close-button]';
+
 describe('добавляем ингредиент в конструктор', function () {
   beforeEach(() => {
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
     cy.viewport(1300, 800);
-    cy.visit('http://localhost:4000');
+    cy.visit('/');
   });
 
   it('добавление булки в конструктор', () => {
-    cy.get('[data-cy=buns-ingredients]').contains('Добавить').click();
-    cy.get('[data-cy=constructor-bun-1]')
-      .contains('Краторная булка')
-      .should('exist');
-    cy.get('[data-cy=constructor-bun-2]')
-      .contains('Краторная булка')
-      .should('exist');
+    cy.get(BUNS_INGREDIENTS).contains('Добавить').click();
+    cy.get(TOP_BUN_CONSTRUCTOR).contains('Краторная булка').should('exist');
+    cy.get(BOTTOM_BUN_CONSTRUCTOR).contains('Краторная булка').should('exist');
   });
+
   it('добавление булки и котлеты', () => {
-    cy.get('[data-cy=buns-ingredients]').contains('Добавить').click();
-    cy.get('[data-cy=mains-ingredients]').contains('Добавить').click();
-    cy.get('[data-cy=constructor-bun-1]')
-      .contains('Краторная булка')
-      .should('exist');
-    cy.get('[data-cy=constructor-bun-2]')
-      .contains('Краторная булка')
-      .should('exist');
-    cy.get('[data-cy=constructor-main]')
+    cy.get(BUNS_INGREDIENTS).contains('Добавить').click();
+    cy.get(MAIN_INGREDIENTS).contains('Добавить').click();
+    cy.get(TOP_BUN_CONSTRUCTOR).contains('Краторная булка').should('exist');
+    cy.get(BOTTOM_BUN_CONSTRUCTOR).contains('Краторная булка').should('exist');
+    cy.get(MAIN_INGREDIENTS_CONSTRUCTOR)
       .contains('Биокотлета из марсианской Магнолии')
       .should('exist');
   });
@@ -35,26 +36,26 @@ describe('тест модального окна ингредиента', () => 
   beforeEach(() => {
     cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
     cy.viewport(1300, 800);
-    cy.visit('http://localhost:4000');
+    cy.visit('/');
   });
 
   it('открытие модального окна', () => {
-    cy.get('[data-cy=buns-ingredients]').contains('Краторная булка').click();
-    cy.get('[data-cy=modal]').should('exist');
+    cy.get(BUNS_INGREDIENTS).contains('Краторная булка').click();
+    cy.get(MODAL).should('exist');
   });
 
   it('открытие модального окна и закрытие на крестик', () => {
-    cy.get('[data-cy=buns-ingredients]').contains('Краторная булка').click();
-    cy.get('[data-cy=modal]').should('exist');
-    cy.get('[data-cy=modal__close-button]').click();
-    cy.get('[data-cy=modal]').should('not.exist');
+    cy.get(BUNS_INGREDIENTS).contains('Краторная булка').click();
+    cy.get(MODAL).should('exist');
+    cy.get(MODAL_CLOSE_BUTTON).click();
+    cy.get(MODAL).should('not.exist');
   });
 
   it('открытие модального окна и закрытие на оверлей', () => {
-    cy.get('[data-cy=buns-ingredients]').contains('Краторная булка').click();
-    cy.get('[data-cy=modal]').should('exist');
+    cy.get(BUNS_INGREDIENTS).contains('Краторная булка').click();
+    cy.get(MODAL).should('exist');
     cy.get('[data-cy=modal__overlay]').click('left', { force: true });
-    cy.get('[data-cy=modal]').should('not.exist');
+    cy.get(MODAL).should('not.exist');
   });
 });
 
@@ -75,7 +76,7 @@ describe('оформление заказа', () => {
     cy.setCookie('accessToken', 'test-accessToken');
 
     cy.viewport(1300, 800);
-    cy.visit('http://localhost:4000');
+    cy.visit('/');
   });
 
   afterEach(() => {
@@ -84,15 +85,11 @@ describe('оформление заказа', () => {
   });
 
   it('заказ бургера из краторной булки и биокотлеты', () => {
-    cy.get('[data-cy=buns-ingredients]').contains('Добавить').click();
-    cy.get('[data-cy=mains-ingredients]').contains('Добавить').click();
-    cy.get('[data-cy=constructor-bun-1]')
-      .contains('Краторная булка')
-      .should('exist');
-    cy.get('[data-cy=constructor-bun-2]')
-      .contains('Краторная булка')
-      .should('exist');
-    cy.get('[data-cy=constructor-main]')
+    cy.get(BUNS_INGREDIENTS).contains('Добавить').click();
+    cy.get(MAIN_INGREDIENTS).contains('Добавить').click();
+    cy.get(TOP_BUN_CONSTRUCTOR).contains('Краторная булка').should('exist');
+    cy.get(BOTTOM_BUN_CONSTRUCTOR).contains('Краторная булка').should('exist');
+    cy.get(MAIN_INGREDIENTS_CONSTRUCTOR)
       .contains('Биокотлета из марсианской Магнолии')
       .should('exist');
 
@@ -112,12 +109,12 @@ describe('оформление заказа', () => {
 
     cy.get('[data-cy=order-number]').contains('59648').should('exist');
 
-    cy.get('[data-cy=modal__close-button]').click();
-    cy.get('[data-cy=modal]').should('not.exist');
+    cy.get(MODAL_CLOSE_BUTTON).click();
+    cy.get(MODAL).should('not.exist');
 
-    cy.get('[data-cy=constructor-bun-1]').should('not.exist');
-    cy.get('[data-cy=constructor-bun-2]').should('not.exist');
-    cy.get('[data-cy=constructor-main]')
+    cy.get(TOP_BUN_CONSTRUCTOR).should('not.exist');
+    cy.get(BOTTOM_BUN_CONSTRUCTOR).should('not.exist');
+    cy.get(MAIN_INGREDIENTS_CONSTRUCTOR)
       .contains('Биокотлета из марсианской Магнолии')
       .should('not.exist');
   });

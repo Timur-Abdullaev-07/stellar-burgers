@@ -2,17 +2,11 @@ import { describe, expect, test } from '@jest/globals';
 import {
   ingredientsReducer,
   getAllIngredients,
-  TIngredientSlice
+  initialState
 } from '../slices/ingredientsSlice';
 import { TIngredient } from '@utils-types';
 
 describe('ingredientsSlice', () => {
-  const initialState: TIngredientSlice = {
-    ingredients: [],
-    loading: false,
-    error: null
-  };
-
   test('getAllIngredients.pending', () => {
     const referenceState = {
       ingredients: [],

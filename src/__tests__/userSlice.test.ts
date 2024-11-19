@@ -6,21 +6,11 @@ import {
   logoutUser,
   getUserInform,
   updateUser,
-  TUserState
+  initialState
 } from '../slices/userSlice';
 import { TUser } from '@utils-types';
 
 describe('userSlice', () => {
-  const initialState: TUserState = {
-    isAuthChecked: false,
-    isAuthenticated: false,
-    user: null,
-    loginUserError: '',
-    registerUserError: '',
-    logoutUserError: '',
-    userRequest: false
-  };
-
   const loginData = {
     email: 'test@mail.ru',
     password: '0000'
