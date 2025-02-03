@@ -9,7 +9,7 @@ import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
 
 export const BURGER_CONSTRUCTOR_SLICE_NAME = 'burgerConstructor';
 
-type TBurgerConstructor = {
+export type TBurgerConstructor = {
   constructorItems: {
     bun: TIngredient | null;
     ingredients: Array<TConstructorIngredient>;
@@ -19,7 +19,7 @@ type TBurgerConstructor = {
   error: null | string;
 };
 
-const initialState: TBurgerConstructor = {
+export const initialState: TBurgerConstructor = {
   constructorItems: {
     bun: null,
     ingredients: []
